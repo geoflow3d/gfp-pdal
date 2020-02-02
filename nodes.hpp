@@ -4,8 +4,8 @@ namespace geoflow::nodes::gfpdal {
 
   class EptLoaderNode:public Node {
     std::string dirpath = "";
-    int thin_nth=5;
-    int filter_class = 6;
+    int filter_step=5;
+    std::string filter_limits = "Classification[0:18]";
     bool do_class_filter = true;
     public:
     using Node::Node;
@@ -17,8 +17,8 @@ namespace geoflow::nodes::gfpdal {
       add_output("colors", typeid(vec3f));
 
       add_param("dirpath", ParamPath(dirpath, "EPT directory"));
-      add_param("thin_nth", ParamBoundedInt(thin_nth, 0, 100, "Thin factor"));
-      add_param("filter_class", ParamBoundedInt(filter_class, 0, 100, "Filter class"));
+      add_param("filter_step", ParamBoundedInt(filter_step, 1, 100, "Keep Nth (decimate)"));
+      add_param("filter_limits", ParamString(filter_limits, "PDAL Range filter"));
       add_param("do_filter", ParamBool(do_class_filter, "Do class filter"));
     }
     void process();
