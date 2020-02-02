@@ -21,9 +21,19 @@
   namespace fs = ghc::filesystem;
 #endif
 
-namespace geoflow::nodes::pdal {
+namespace geoflow::nodes::gfpdal {
 
 void EptLoaderNode::process(){
+  pdal::Options options;
+  options.add("filename", "ept://" + dirpath);
+
+  pdal::EptReader reader;
+  reader.setOptions(options);
+
+  const pdal::QuickInfo qi(reader.preview());
+
+  std::cout << "EPT Bounds: " << qi.m_bounds << std::endl;
+  std::cout << "EPT Point Count: " << qi.m_pointCount << std::endl;
 }
 
 
