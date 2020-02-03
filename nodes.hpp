@@ -6,7 +6,6 @@ namespace geoflow::nodes::gfpdal {
     std::string dirpath = "";
     int filter_step=5;
     std::string filter_limits = "Classification[0:18]";
-    bool do_class_filter = true;
     public:
     using Node::Node;
     void init() {
@@ -19,7 +18,6 @@ namespace geoflow::nodes::gfpdal {
       add_param("dirpath", ParamPath(dirpath, "EPT directory"));
       add_param("filter_step", ParamBoundedInt(filter_step, 1, 100, "Keep Nth (decimate)"));
       add_param("filter_limits", ParamString(filter_limits, "PDAL Range filter"));
-      add_param("do_filter", ParamBool(do_class_filter, "Do class filter"));
     }
     void process();
   };
