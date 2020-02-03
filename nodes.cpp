@@ -32,19 +32,10 @@ void EptLoaderNode::process(){
   vec1f order;
   vec3f colors;
 
-  // Init a Pipeline and build it up based on the user parameters. Then we
-  // need to execute the Pipeline itself, and not the individual readers or
-  // filters.
-  pdal::PipelineManager mgr;
-
-  // limit to a small extent for testing
-  pdal::BOX2D bounds(93876.35291718, 434066.13498522, 94084.78298842, 434329.92274137);
-
   pdal::EptReader reader;
   {
     pdal::Options options;
     options.add("filename", "ept://" + dirpath);
-    options.add("bounds", bounds);
     reader.setOptions(options);
   }
 
